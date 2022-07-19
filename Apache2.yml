@@ -3,12 +3,10 @@
   hosts: win
 
   tasks:
-    - name: Download the Apache installer
-      win_get_url:
-        url: https://archive.apache.org/dist/httpd/binaries/win32/httpd-2.2.25-win32-x86-no_ssl.msi
-        dest: C:\ansible_examples\httpd-2.2.25-win32-x86-no_ssl.msi
-
-    - name: Install MSI
-      win_package:
-        path: C:\ansible_examples\httpd-2.2.25-win32-x86-no_ssl.msi
-        state: present
+    - name: Set Windows Powershell
+     win_regedit:
+      path: HKLM:\SOFTWARE\OpenSSH
+      name: DefaultShell
+      data: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+      type: string
+      state: present
